@@ -7,6 +7,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useAuth } from "../hooks/useAuth";
 import { adminTabs } from "../router/admin-tabs";
+import { userTabs } from "../router/user-tabs";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button, IconButton } from "@mui/material";
@@ -30,6 +31,8 @@ export default function Navbar() {
 
   const drawerWidth = collapsed ? 60 : 250; 
 
+  const tabs = authState.role === "admin" ? adminTabs : userTabs;
+
   const DrawerList = (
     <Box
       sx={{ width: drawerWidth }}
@@ -47,7 +50,7 @@ export default function Navbar() {
         {!collapsed && <p>{authState.username}</p>} 
       </Box>
       <List>
-        {adminTabs.map(({ path, name, Icon }) => (
+        {tabs.map(({ path, name, Icon }) => (
           <ListItem key={name} disablePadding>
             <ListItemButton
               onClick={() => {customNavigate(path)}}

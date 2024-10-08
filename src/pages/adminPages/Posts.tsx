@@ -6,6 +6,7 @@ import { usePosts } from "../../hooks/usePosts";
 import { useState } from "react";
 import { CreatePost } from "../../components/posts/CreatePost";
 import { EditPost } from "../../components/posts/EditPost";
+import SearchBar from "../../components/searchBar/SearchBar";
 
 export interface PostsProps {
   userId: number;
@@ -20,19 +21,22 @@ export interface PostsProps {
 //   userId: number;
 // }
 
-
 const Posts = () => {
   const [openPostModal, setOpenPostModal] = useState(false);
   const [openPostEditModal, setOpenPostEditModal] = useState(false);
   const [visiblePosts, setVisiblePosts] = useState(10);
   const { posts, loading } = usePosts();
   const [postSelected, setPostSelected] = useState<PostsProps>();
+  const [query, setQuery] = useState<string>("");
 
   const handleEditPost = (post: PostsProps) => {
-    setPostSelected(post); // Guardar el post seleccionado
-    setOpenPostEditModal(true); // Abrir el modal de edición
+    setPostSelected(post);
+    setOpenPostEditModal(true);
   };
 
+  const filteredPosts = posts.filter((post) => {
+    return post.title.toLowerCase().includes(query.toLowerCase());
+  });
 
   return (
     <Box
@@ -48,6 +52,11 @@ const Posts = () => {
         createLabel="Create Post"
         setOpenModal={setOpenPostModal}
       />
+      <SearchBar 
+        query={query} 
+        setQuery={setQuery} 
+        label="Search posts" 
+      />
       <Box
         sx={{
           display: "flex",
@@ -56,8 +65,8 @@ const Posts = () => {
           justifyContent: "center",
         }}
       >
-        {posts.map((post) => (
-          <PostCard key={post.id} post={post} onEdit={handleEditPost}/>
+        {filteredPosts.map((post) => (
+          <PostCard key={post.id} post={post} onEdit={handleEditPost} />
         ))}
       </Box>
       {loading && <p>Loading posts...</p>}
@@ -73,12 +82,12 @@ const Posts = () => {
           <MoreIcon />
         </Icon>
       )}
-      <CreatePost 
+      <CreatePost
         openPostModal={openPostModal}
         setOpenPostModal={setOpenPostModal}
       />
       {postSelected && (
-        <EditPost 
+        <EditPost
           openPostEditModal={openPostEditModal}
           setOpenPostEditModal={setOpenPostEditModal}
           postSelected={postSelected}

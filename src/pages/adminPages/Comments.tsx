@@ -1,43 +1,17 @@
 import { Box } from '@mui/material'
 import { Header } from '../../components/headers/Header'
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CommentCard from '../../components/cards/CommentCard';
 import SearchBar from '../../components/searchBar/SearchBar';
-
-interface CommentsProps {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
-}
+import { useComments } from '../../hooks/useComments';
 
 const Comments = () => {
-  const [comments, setComments] = useState<CommentsProps[]>([]);
+  const { comments } = useComments();
   const [query, setQuery] = useState<string>("");
-  const [filteredComments, setFilteredComments] = useState<CommentsProps[]>([]);
-  const fetchComments = async () => { 
-    try {
-      const response = await axios.get("https://jsonplaceholder.typicode.com/comments");
-      setComments(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    const filtered = comments.filter(
-      (comment) =>
-        comment.email.toLowerCase().includes(query.toLowerCase()) ||
-        comment.name.toLowerCase().includes(query.toLowerCase()) ||
-        comment.body.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredComments(filtered);
-  }, [query, comments]);
-  
-  useEffect(() => { 
-    fetchComments();
-  }, []);
+
+  const filterComments = comments.filter(comment => {
+    return comment.name.toLowerCase().includes(query.toLowerCase());
+  });
 
   return (
     <Box
@@ -49,7 +23,11 @@ const Comments = () => {
       }}
     >
       <Header title='Comments'  />
-      <SearchBar query={query} setQuery={setQuery} />
+      <SearchBar 
+        query={query} 
+        setQuery={setQuery} 
+        label='Search comments' 
+      />
       <Box
         sx={{
           display: 'flex',
@@ -59,7 +37,7 @@ const Comments = () => {
         }}
       >
         {
-          filteredComments.map(comment => (
+          filterComments.map(comment => (
             <CommentCard 
               key={comment.id}
               postId={comment.postId}

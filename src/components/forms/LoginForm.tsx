@@ -28,7 +28,7 @@ const LoginForm = () => {
         navigate("/posts");
         toast.success("Logged in successfully");
       } else if (authState.role === "user") {
-        navigate("/user");
+        navigate("/user/posts");
         toast.success("Logged in successfully");
       }
     }
