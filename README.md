@@ -12,7 +12,7 @@ Proyecto consiste en una aplicacion web desarrollada con React y Vite, se Utiliz
     
   1- Clonar el repositorio 
   
-    git clone 
+    git clone https://github.com/ostricnano/eldar.git
     
   2- Cambiar al directorio del proyecto
   
