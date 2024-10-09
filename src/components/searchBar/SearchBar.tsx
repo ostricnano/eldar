@@ -11,7 +11,30 @@ const SearchBar = ({ query, label, setQuery }: SearchBarProps) => {
         variant="outlined"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        sx={{ width: "300px" }}
+        sx={{
+          width: "300px",
+          borderRadius: "5px",
+          "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+              borderColor: "grey",
+            },
+            "&:hover fieldset": {
+              borderColor: "#ababab", 
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "#ababab", 
+            },
+          },
+          "& .MuiInputBase-input": {
+            color: "black", 
+          },
+          "& .MuiInputLabel-root": {
+            color: "grey",
+          },
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "#ababab", 
+          },
+        }}
       />
       <IconButton>
         <SearchIcon />
