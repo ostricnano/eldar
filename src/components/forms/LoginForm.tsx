@@ -6,14 +6,12 @@ import * as Yup from "yup";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import RadioInput from "../customInputs/RadioInput";
 
 const loginValidationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
-  role: Yup.string().required("Role is required"),
 });
 
 const LoginForm = () => {
@@ -24,21 +22,21 @@ const LoginForm = () => {
     initialValues: {
       email: "",
       password: "",
-      role: "",
     },
     onSubmit: async (values) => {
-      await login(values.email, values.password, values.role);
-      const jwToken = sessionStorage.getItem("jwt");
+      await login(values.email, values.password);
+      const token = sessionStorage.getItem("jwt");
       const role = sessionStorage.getItem("role");
-      if (jwToken && role) {
-        if (role === "admin") {
-          navigate("/users");
-          toast.success("Logged in successfully");
-        } else if (role === "user") {
-          navigate("/user/users");
-          toast.success("Logged in successfully");
-        }
+      if (token && role === "admin") {
+        toast.success("Logged in successfully");
+        navigate("/users");
+      } else if (token && role === "user") {
+        toast.success("Logged in successfully");
+        navigate("/user/users");
+      } else {
+        toast.error("Invalid credentials");
       }
+      
     },
     validationSchema: loginValidationSchema,
     validateOnChange: false,
@@ -96,15 +94,6 @@ const LoginForm = () => {
               onChange={handleChange}
               error={Boolean(errors.password)}
               helperText={errors.password}
-            />
-            <RadioInput
-              label="Role"
-              name="role"
-              value={values.role}
-              options={["admin", "user"]}
-              error={Boolean(errors.role)}
-              helperText={errors.role}
-              onChange={handleChange}
             />
           </Box>
           <Box

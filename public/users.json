@@ -3,30 +3,30 @@
     "id": 1,
     "password": "adminPass123",
     "email": "admin1@example.com",
-    "rol": "admin"
+    "role": "admin"
   },
   {
     "id": 2,
     "password": "userPass123",
     "email": "user1@example.com",
-    "rol": "user"
+    "role": "user"
   },
   {
     "id": 3,
     "password": "userPass456",
     "email": "user2@example.com",
-    "rol": "user"
+    "role": "user"
   },
   {
     "id": 4,
     "password": "adminPass456",
     "email": "admin2@example.com",
-    "rol": "admin"
+    "role": "admin"
   },
   {
     "id": 5,
     "password": "userPass789",
     "email": "user3@example.com",
-    "rol": "user"
+    "role": "user"
   }
 ]

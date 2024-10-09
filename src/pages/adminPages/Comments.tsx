@@ -5,6 +5,7 @@ import CommentCard from "../../components/cards/CommentCard";
 import SearchBar from "../../components/searchBar/SearchBar";
 import { useComments } from "../../hooks/useComments";
 import { LoadingSpinner } from "../../icons/LoadingSpinner";
+import { basePageStyles } from "../../assets/styles/pages";
 
 const Comments = () => {
   const { comments, loading } = useComments();
@@ -33,12 +34,7 @@ const Comments = () => {
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      sx={basePageStyles}
     >
       <Header title="Comments" />
       <SearchBar query={query} setQuery={setQuery} label="Search comments" />

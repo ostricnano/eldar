@@ -12,6 +12,11 @@ interface AuthProviderProps {
   children: React.ReactNode;
 }
 
+interface User {
+  email: string;
+  password: string;
+}
+
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const navigate = useNavigate();
   const [authState, setAuthState] = useState<AuthState>({
@@ -19,17 +24,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     username: null,
     role: null,
   });
-  const login = (email: string, password: string, role: string) => {
-    const jwToken = "jwt-fake-token";
-    if (email && password) {
+
+  const login = async (email: string, password: string) => {
+    const users = await fetch('/users.json').then((response) => response.json());
+    const foundUser = users.find((user: User) => user.email === email && user.password === password);
+    if(foundUser) {
       setAuthState({
-        jwt: jwToken,
+        jwt: "1234",
         username: email,
-        role: role,
+        role: foundUser.role,
       });
-      sessionStorage.setItem("jwt", jwToken);
+      sessionStorage.setItem("jwt", "1234");
       sessionStorage.setItem("username", email);
-      sessionStorage.setItem("role", role);
+      sessionStorage.setItem("role", foundUser.role);
     }
   };
 
