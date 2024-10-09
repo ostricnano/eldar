@@ -4,61 +4,71 @@ Proyecto consiste en una aplicacion web desarrollada con React y Vite, se Utiliz
 
 ##Instalacion
 
-  Requisitos
-  
+Requisitos
+
     Node.js
-    
+
     npm o yarn
-    
-  1- Clonar el repositorio 
-  
+
+1- Clonar el repositorio
+
     git clone https://github.com/ostricnano/eldar.git
-    
-  2- Cambiar al directorio del proyecto
-  
+
+2- Cambiar al directorio del proyecto
+
     cd eldar
-    
-  3- Instalar las dependencias
-  
+
+3- Instalar las dependencias
+
     npm install
-    
-  4- npm run dev
+
+4- npm run dev
+
+5- Usuario para ingresar
+
+    usuario admin
+      email: admin1@example.com,
+      password: adminPass123,
+      
+    usuarios user
+      password: userPass123,
+      email: user1@example.com,
 
 ##Estructura del proyecto.
 
-├── 📂 src  
+├── 📂 src
 
-│   ├── 📂 assets 
+│ ├── 📂 assets
 
-│   ├── 📂 components
+│ ├── 📂 components
 
-│   ├── 📂 context
+│ ├── 📂 context
 
-│   ├── 📂 hooks
+│ ├── 📂 hooks
 
-│   ├── 📂 icons
+│ ├── 📂 icons
 
-│   ├── 📂 layout
+│ ├── 📂 layout
 
-│   ├── 📂 pages
+│ ├── 📂 pages
 
-│   ├── 📂 router
+│ ├── 📂 router
 
-│   ├── 📂 services
+│ ├── 📂 services
 
-│   ├── 📂 theme
+│ ├── 📂 theme
 
-│   ├── 📂 types
+│ ├── 📂 types
 
-│   ├── 📂 utils
+│ ├── 📂 utils
 
-│   ├── App.tsx
+│ ├── App.tsx
 
-│   ├── index.css
+│ ├── index.css
 
-│   ├── main.tsx
+│ ├── main.tsx
 
-│   └── vite-env.d.ts
+│ └── vite-env.d.ts
 
 ├── .gitignore
 
@@ -70,7 +80,7 @@ Proyecto consiste en una aplicacion web desarrollada con React y Vite, se Utiliz
 
 ├── package.json
 
-├── README.md 
+├── README.md
 
 ├── tsconfig.app.json
 
@@ -80,40 +90,37 @@ Proyecto consiste en una aplicacion web desarrollada con React y Vite, se Utiliz
 
 └── vite.config.ts
 
-
 ##Funcionalidades
 
-  Usuarios adminstrador.
-    Pueden listar, crear, modificar y eliminar post.
-    A fines practicos no se realizo el crud con respecto a usuarios y comentarios.
-  Usuarios de tipo usuario
-    Puede ver usuarios, posts y comentarios.
-    no tienen la posibilidad de crear modificar e editar.
-    
+Usuarios adminstrador.
+Pueden listar, crear, modificar y eliminar post.
+A fines practicos no se realizo el crud con respecto a usuarios y comentarios.
+Usuarios de tipo usuario
+Puede ver usuarios, posts y comentarios.
+no tienen la posibilidad de crear modificar e editar.
+
 ##Autenticacion.
 
-  Un sistema de autenticacion basado en un contexto local, que simula una peticion a un archivo json, los busca dentro del json y si el mismo existe se guardan los datos en la sesion del usuario y en un contexto, dependiendo del tipo de usuario se lo redirige a la seccion de administrador o usuario.
+Un sistema de autenticacion basado en un contexto local, que simula una peticion a un archivo json, los busca dentro del json y si el mismo existe se guardan los datos en la sesion del usuario y en un contexto, dependiendo del tipo de usuario se lo redirige a la seccion de administrador o usuario.
 
 ##API utilizada
 
-  Se utilizo la API recomendada de JSONPlaceholder
-  
-  Se creo una capa de servicio la cual maneja la peticiones mediante Axios, se creo una instancia de axios que es utilizada en todas las peticiones.
-  
-  Se creo un custom hooks para hacer uso de los datos y separar responsabilidades.
+Se utilizo la API recomendada de JSONPlaceholder
+
+Se creo una capa de servicio la cual maneja la peticiones mediante Axios, se creo una instancia de axios que es utilizada en todas las peticiones.
+
+Se creo un custom hooks para hacer uso de los datos y separar responsabilidades.
 
 ##Tecnologias utilizadas.
 
-  React para construir la interfaz de usuario.
-  
-  Vite.
-  
-  MUI para el desarrollo de estilos.
-  
-  Axios para peticiones HTTP
-  
-  Toaste para las notificaciones.
-  
-  formik para el manejo de formularios.
+React para construir la interfaz de usuario.
 
+Vite.
 
+MUI para el desarrollo de estilos.
+
+Axios para peticiones HTTP
+
+Toaste para las notificaciones.
+
+formik para el manejo de formularios.
