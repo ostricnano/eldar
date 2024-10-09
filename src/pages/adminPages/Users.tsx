@@ -18,7 +18,7 @@ export const Users = () => {
     <Box
       sx={basePageStyles}
     >
-      <Header title="Users" createLabel="Create users" />
+      <Header title="Users" />
       <SearchBar query={query} setQuery={setQuery} label='Search users'  />
       <Box
         sx={cardContainerStyles}
