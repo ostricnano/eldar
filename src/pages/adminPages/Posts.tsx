@@ -1,7 +1,6 @@
-import { Box, Icon } from "@mui/material";
+import { Box, Pagination } from "@mui/material";
 import { Header } from "../../components/headers/Header";
 import PostCard from "../../components/cards/postsCards";
-import { MoreIcon } from "../../icons/MoreIcon";
 import { usePosts } from "../../hooks/usePosts";
 import { useState } from "react";
 import { CreatePost } from "../../components/posts/CreatePost";
@@ -15,19 +14,17 @@ export interface PostsProps {
   body: string;
 }
 
-// interface PostFormProps {
-//   title: string;
-//   body: string;
-//   userId: number;
-// }
-
 const Posts = () => {
   const [openPostModal, setOpenPostModal] = useState(false);
   const [openPostEditModal, setOpenPostEditModal] = useState(false);
-  const [visiblePosts, setVisiblePosts] = useState(10);
+
   const { posts, loading } = usePosts();
   const [postSelected, setPostSelected] = useState<PostsProps>();
+
   const [query, setQuery] = useState<string>("");
+
+  const [currentPage, setCurrentPage] = useState<number>(1); 
+  const postsPerPage = 6; 
 
   const handleEditPost = (post: PostsProps) => {
     setPostSelected(post);
@@ -37,6 +34,15 @@ const Posts = () => {
   const filteredPosts = posts.filter((post) => {
     return post.title.toLowerCase().includes(query.toLowerCase());
   });
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+
+  const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
+  };
 
   return (
     <Box
@@ -52,11 +58,7 @@ const Posts = () => {
         createLabel="Create Post"
         setOpenModal={setOpenPostModal}
       />
-      <SearchBar 
-        query={query} 
-        setQuery={setQuery} 
-        label="Search posts" 
-      />
+      <SearchBar query={query} setQuery={setQuery} label="Search posts" />
       <Box
         sx={{
           display: "flex",
@@ -65,22 +67,17 @@ const Posts = () => {
           justifyContent: "center",
         }}
       >
-        {filteredPosts.map((post) => (
+        {currentPosts.map((post) => (
           <PostCard key={post.id} post={post} onEdit={handleEditPost} />
         ))}
       </Box>
       {loading && <p>Loading posts...</p>}
-      {visiblePosts < posts.length && (
-        <Icon
-          sx={{
-            fontSize: 40,
-            color: "primary.main",
-            cursor: "pointer",
-          }}
-          onClick={() => setVisiblePosts((prev) => prev + 10)}
-        >
-          <MoreIcon />
-        </Icon>
+      {filteredPosts.length > 0 && (
+        <Pagination
+          count={Math.ceil(filteredPosts.length / postsPerPage)}
+          page={currentPage}
+          onChange={handleChangePage}
+        />
       )}
       <CreatePost
         openPostModal={openPostModal}

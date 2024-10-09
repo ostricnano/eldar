@@ -66,7 +66,7 @@ export const Users = () => {
       }}
     >
       <Header title="Users" createLabel="Create users" />
-      <SearchBar query={query} setQuery={setQuery} />
+      <SearchBar query={query} setQuery={setQuery} label='Search users'  />
       <Box
         sx={{
           display: "flex",

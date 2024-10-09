@@ -4,14 +4,14 @@ import { UsersIcon } from "../icons/UsersIcon";
 
 export const userTabs = [
   {
-    name: "Posts",
-    path: "/user/posts",
-    Icon: PostIcon,
-  },
-  {
     name: "Users",
     path: "/user/users",
     Icon: UsersIcon,
+  },
+  {
+    name: "Posts",
+    path: "/user/posts",
+    Icon: PostIcon,
   },
   {
     name: "Comments",
