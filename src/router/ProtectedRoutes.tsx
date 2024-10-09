@@ -7,12 +7,10 @@ const ProtectedRoutes = () => {
     return <Navigate to="/" />;
   }
   if (authState.role !== "admin" && authState.jwt) {
-    return <Navigate to="/user" replace />;
+    return <Navigate to="/" replace />;
   }
 
-  return (
-  <Outlet />
-);
+  return <Outlet />;
 };
 
 export default ProtectedRoutes;

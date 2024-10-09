@@ -4,7 +4,6 @@ import { CustomButton } from "../buttons/CustomButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../hooks/useAuth";
-import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import RadioInput from "../customInputs/RadioInput";
@@ -18,21 +17,8 @@ const loginValidationSchema = Yup.object().shape({
 });
 
 const LoginForm = () => {
-  const [loading, setLoading] = useState(false);
-  const { login, authState } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (authState.jwt) {
-      if (authState.role === "admin") {
-        navigate("/users");
-        toast.success("Logged in successfully");
-      } else if (authState.role === "user") {
-        navigate("/user/users");
-        toast.success("Logged in successfully");
-      }
-    }
-  }, [authState.jwt, authState.role, navigate]);
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
@@ -40,22 +26,18 @@ const LoginForm = () => {
       password: "",
       role: "",
     },
-    onSubmit: (values) => {
-      setLoading(true);
-      try {
-        login(values.email, values.password, values.role);
-        if (authState.jwt && authState.role === "admin") {
-          navigate("/posts");
+    onSubmit: async (values) => {
+      await login(values.email, values.password, values.role);
+      const jwToken = sessionStorage.getItem("jwt");
+      const role = sessionStorage.getItem("role");
+      if (jwToken && role) {
+        if (role === "admin") {
+          navigate("/users");
           toast.success("Logged in successfully");
-        } else if (authState.jwt && authState.role === "user") {
-          navigate("user");
+        } else if (role === "user") {
+          navigate("/user/users");
           toast.success("Logged in successfully");
         }
-      } catch (error) {
-        toast.error("Failed to login");
-        console.log(error);
-      } finally {
-        setLoading(false);
       }
     },
     validationSchema: loginValidationSchema,
@@ -133,7 +115,7 @@ const LoginForm = () => {
               width: "100%",
             }}
           >
-            <CustomButton type="submit" loading={loading}>
+            <CustomButton type="submit" >
               Iniciar sesión
             </CustomButton>
           </Box>
