@@ -22,7 +22,7 @@ const PostCard = ({ post, onEdit }: PostCardProps) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={handleEditClick}>
+        <Button sx={{color:'#fff', backgroundColor:'#ababab'}} size="small" onClick={handleEditClick}>
           Edit
         </Button>
       </CardActions>

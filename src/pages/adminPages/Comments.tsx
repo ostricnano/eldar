@@ -5,7 +5,7 @@ import CommentCard from "../../components/cards/CommentCard";
 import SearchBar from "../../components/searchBar/SearchBar";
 import { useComments } from "../../hooks/useComments";
 import { LoadingSpinner } from "../../icons/LoadingSpinner";
-import { basePageStyles } from "../../assets/styles/pages";
+import { basePageStyles, cardContainerStyles } from "../../assets/styles/pages";
 
 const Comments = () => {
   const { comments, loading } = useComments();
@@ -33,9 +33,7 @@ const Comments = () => {
   };
 
   return (
-    <Box
-      sx={basePageStyles}
-    >
+    <Box sx={basePageStyles}>
       <Header title="Comments" />
       <SearchBar query={query} setQuery={setQuery} label="Search comments" />
       {loading && (
@@ -43,15 +41,7 @@ const Comments = () => {
           Loading... <LoadingSpinner />
         </p>
       )}
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "0.5rem",
-        }}
-      >
+      <Box sx={cardContainerStyles}>
         {currentComments.map((comment) => (
           <CommentCard
             key={comment.id}

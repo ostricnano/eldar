@@ -9,10 +9,12 @@ import Posts from "../pages/adminPages/Posts";
 import Comments from "../pages/adminPages/Comments";
 import LoginPage from "../pages/authPages/LoginPage";
 import UserPage from "../pages/userPages/UserPage";
-import "../index.css";
 import ProtectedUserRoutes from "./ProtectedUserRoutes";
 import PostPages from "../pages/userPages/PostPages";
 import CommentPage from "../pages/userPages/CommentPage";
+import { ThemeProvider } from "@emotion/react";
+import { theme } from "../theme/themeConfig";
+import "../index.css";
 
 const AppRouter = () => {
   return (
@@ -25,31 +27,31 @@ const AppRouter = () => {
             height: "45px",
             padding: "0.5rem",
           },
-          
         }}
       />
       <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            
-            {/* Add ProtectedRoutes component to the Route element */}
-            <Route element={<ProtectedRoutes />}>
-              <Route element={<Navbar />} >
-                <Route path="/users" element={<Users />} />
-                <Route path="/posts" element={<Posts />} />
-                <Route path="/comments" element={<Comments />} />
+        <ThemeProvider theme={theme}>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<LoginPage />} />
+              <Route element={<ProtectedRoutes />}>
+                <Route element={<Navbar />}>
+                  <Route path="/users" element={<Users />} />
+                  <Route path="/posts" element={<Posts />} />
+                  <Route path="/comments" element={<Comments />} />
+                </Route>
               </Route>
-            </Route>
-            <Route element={<ProtectedUserRoutes />}>
-              <Route element={<Navbar />}>
-                <Route path="/user/users" element={<UserPage />} />
-                <Route path="/user/posts" element={<PostPages />} />
-                <Route path="/user/comments" element={<CommentPage/>} />
+
+              <Route element={<ProtectedUserRoutes />}>
+                <Route element={<Navbar />}>
+                  <Route path="/user/users" element={<UserPage />} />
+                  <Route path="/user/posts" element={<PostPages />} />
+                  <Route path="/user/comments" element={<CommentPage />} />
+                </Route>
               </Route>
-            </Route>
-          </Routes>
-        </AuthProvider>
+            </Routes>
+          </AuthProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </Suspense>
   );

@@ -50,7 +50,6 @@ export const CreatePost = ({
       openModal={openPostModal}
       setOpenModal={setOpenPostModal}
       title="Create a post"
-      width="50%"
     >
       <Box
         sx={{

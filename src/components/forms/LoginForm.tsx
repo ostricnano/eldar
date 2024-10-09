@@ -4,8 +4,8 @@ import { CustomButton } from "../buttons/CustomButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../hooks/useAuth";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { theme } from "../../theme/themeConfig";
+
 
 const loginValidationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -16,7 +16,6 @@ const loginValidationSchema = Yup.object().shape({
 
 const LoginForm = () => {
   const { login } = useAuth();
-  const navigate = useNavigate();
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
@@ -24,19 +23,7 @@ const LoginForm = () => {
       password: "",
     },
     onSubmit: async (values) => {
-      await login(values.email, values.password);
-      const token = sessionStorage.getItem("jwt");
-      const role = sessionStorage.getItem("role");
-      if (token && role === "admin") {
-        toast.success("Logged in successfully");
-        navigate("/users");
-      } else if (token && role === "user") {
-        toast.success("Logged in successfully");
-        navigate("/user/users");
-      } else {
-        toast.error("Invalid credentials");
-      }
-      
+      login(values.email, values.password);
     },
     validationSchema: loginValidationSchema,
     validateOnChange: false,
@@ -51,6 +38,7 @@ const LoginForm = () => {
         justifyContent: "center",
         width: "100%",
         padding: "1rem",
+        backgroundColor: theme.palette.primary.main,
       }}
     >
       <Typography
@@ -104,9 +92,7 @@ const LoginForm = () => {
               width: "100%",
             }}
           >
-            <CustomButton type="submit" >
-              Iniciar sesión
-            </CustomButton>
+            <CustomButton type="submit">Iniciar sesión</CustomButton>
           </Box>
         </form>
       </Box>

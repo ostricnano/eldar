@@ -7,7 +7,6 @@ export const BaseModal = ({
   openModal,
   setOpenModal,
   title,
-  width = "60%",
   onClose = () => setOpenModal(false),
 }: BaseModalProps) => {
   return (
@@ -23,7 +22,11 @@ export const BaseModal = ({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: width,
+          width: {
+            xs: "90%", 
+            sm: "70%",  
+            md: "50%",  
+          },
           bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,

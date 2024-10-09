@@ -37,6 +37,7 @@ export const updatePost = async (id: number, post: CreatePost) => {
     }
   } catch (error) {
     console.error(error);
+    toast.error("Error updating post");
   }
 };
 

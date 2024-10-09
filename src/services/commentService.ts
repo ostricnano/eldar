@@ -21,6 +21,7 @@ export const createComment = async (comment: CreateComments) => {
       toast.error("Error creating comment");
     }
   } catch (error) {
+    toast.error("Error updating post");
     console.error(error);
   }
 };
@@ -35,6 +36,7 @@ export const updateComment = async (id: number, comment: CreateComments) => {
       toast.error("Error updating comment");
     }
   } catch (error) {
+    toast.error("Error updating post");
     console.error(error);
   }
 };
@@ -49,7 +51,7 @@ export const deleteComment = async (id: number) => {
       toast.error("Error deleting comment");
     }
   } catch (error) {
-    console.error(error);
     toast.error("Error deleting comment");
+    console.error(error);
   }
 };

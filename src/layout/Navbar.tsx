@@ -77,7 +77,7 @@ export default function Navbar() {
       >
         {
           !collapsed ? (
-            <Button variant="outlined" onClick={logout}>Log out</Button>
+            <Button sx={{backgroundColor:'#ababab'}} variant="outlined" onClick={logout}>Log out</Button>
           ) : (
             <IconButton onClick={logout}>
               <LogoutIcon />

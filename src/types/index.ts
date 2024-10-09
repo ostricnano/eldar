@@ -77,7 +77,6 @@ export interface BaseModalProps {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   title?: string;
-  width?: string;
   onClose?: () => void;
 }
 

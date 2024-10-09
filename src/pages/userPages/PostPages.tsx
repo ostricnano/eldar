@@ -6,6 +6,11 @@ import { CreatePost } from "../../components/posts/CreatePost";
 import { EditPost } from "../../components/posts/EditPost";
 import SearchBar from "../../components/searchBar/SearchBar";
 import { PostsProps } from "../../types";
+import {
+  basePageStyles,
+  cardContainerStyles,
+  userHeaderStyles,
+} from "../../assets/styles/pages";
 
 const PostPages = () => {
   const [openPostModal, setOpenPostModal] = useState(false);
@@ -40,36 +45,12 @@ const PostPages = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "20px",
-        }}
-      >
+    <Box sx={basePageStyles}>
+      <Box sx={userHeaderStyles}>
         <Typography variant="h5">Posts</Typography>
         <SearchBar query={query} setQuery={setQuery} label="Search posts" />
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "0.5rem",
-        }}
-      >
+      <Box sx={cardContainerStyles}>
         {currentPosts.map((post) => (
           <PostCard key={post.id} post={post} onEdit={handleEditPost} />
         ))}
