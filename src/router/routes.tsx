@@ -10,6 +10,9 @@ import Comments from "../pages/adminPages/Comments";
 import LoginPage from "../pages/authPages/LoginPage";
 import UserPage from "../pages/userPages/UserPage";
 import "../index.css";
+import ProtectedUserRoutes from "./ProtectedUserRoutes";
+import PostPages from "../pages/userPages/PostPages";
+import CommentPage from "../pages/userPages/CommentPage";
 
 const AppRouter = () => {
   return (
@@ -27,13 +30,20 @@ const AppRouter = () => {
         <AuthProvider>
           <Routes>
             <Route path="/" element={<LoginPage />} />
-            <Route path="/user" element={<UserPage />} />
+            
             {/* Add ProtectedRoutes component to the Route element */}
             <Route element={<ProtectedRoutes />}>
               <Route element={<Navbar />} >
                 <Route path="/users" element={<Users />} />
                 <Route path="/posts" element={<Posts />} />
                 <Route path="/comments" element={<Comments />} />
+              </Route>
+            </Route>
+            <Route element={<ProtectedUserRoutes />}>
+              <Route element={<Navbar />}>
+                <Route path="/user/users" element={<UserPage />} />
+                <Route path="/user/posts" element={<PostPages />} />
+                <Route path="/user/comments" element={<CommentPage/>} />
               </Route>
             </Route>
           </Routes>

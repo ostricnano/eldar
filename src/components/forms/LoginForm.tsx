@@ -25,10 +25,10 @@ const LoginForm = () => {
   useEffect(() => {
     if (authState.jwt) {
       if (authState.role === "admin") {
-        navigate("/posts");
+        navigate("/users");
         toast.success("Logged in successfully");
       } else if (authState.role === "user") {
-        navigate("/user");
+        navigate("/user/users");
         toast.success("Logged in successfully");
       }
     }

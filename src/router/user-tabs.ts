@@ -2,20 +2,20 @@ import { CommentsIcon } from "../icons/CommentsIcons";
 import { PostIcon } from "../icons/PostIcon";
 import { UsersIcon } from "../icons/UsersIcon";
 
-export const adminTabs = [
+export const userTabs = [
   {
     name: "Users",
-    path: "/users",
+    path: "/user/users",
     Icon: UsersIcon,
   },
   {
     name: "Posts",
-    path: "/posts",
+    path: "/user/posts",
     Icon: PostIcon,
   },
   {
     name: "Comments",
-    path: "/comments",
+    path: "/user/comments",
     Icon: CommentsIcon,
   },
 ];

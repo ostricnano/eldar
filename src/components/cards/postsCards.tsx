@@ -12,7 +12,7 @@ interface PostCardProps {
 
 const PostCard = ({ post, onEdit }: PostCardProps) => {
   const handleEditClick = () => {
-    onEdit(post); // Llama a la función onEdit con los datos del post
+    onEdit(post); 
   };
   return (
     <Card sx={{ maxWidth: 400, margin: "1rem auto" }}>

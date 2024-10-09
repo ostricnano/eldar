@@ -7,10 +7,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useAuth } from "../hooks/useAuth";
 import { adminTabs } from "../router/admin-tabs";
+import { userTabs } from "../router/user-tabs";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button, IconButton } from "@mui/material";
 import { MenuIcon } from "../icons/MenuIcon";
+import { LogoutIcon } from "../icons/LogoutIcon";
 //import { Avatar } from "../icons/Avatar";
 
 export default function Navbar() {
@@ -30,6 +32,8 @@ export default function Navbar() {
 
   const drawerWidth = collapsed ? 60 : 250; 
 
+  const tabs = authState.role === "admin" ? adminTabs : userTabs;
+
   const DrawerList = (
     <Box
       sx={{ width: drawerWidth }}
@@ -47,7 +51,7 @@ export default function Navbar() {
         {!collapsed && <p>{authState.username}</p>} 
       </Box>
       <List>
-        {adminTabs.map(({ path, name, Icon }) => (
+        {tabs.map(({ path, name, Icon }) => (
           <ListItem key={name} disablePadding>
             <ListItemButton
               onClick={() => {customNavigate(path)}}
@@ -56,7 +60,7 @@ export default function Navbar() {
                 padding: collapsed ? "10px" : "10px 20px",
               }}
             >
-              <Icon fontSize="small" />
+              <Icon fontSize="x-large" />
               {!collapsed && <ListItemText primary={name} sx={{ marginLeft: 2 }} />}
             </ListItemButton>
           </ListItem>
@@ -71,7 +75,15 @@ export default function Navbar() {
           height: 100,
         }}
       >
-        <Button variant="outlined" onClick={logout}>Log out</Button>
+        {
+          !collapsed ? (
+            <Button variant="outlined" onClick={logout}>Log out</Button>
+          ) : (
+            <IconButton onClick={logout}>
+              <LogoutIcon />
+            </IconButton>
+          )
+        }
       </Box>
     </Box>
   );
@@ -85,12 +97,23 @@ export default function Navbar() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             transition: 'width 0.3s',
+            overflowX: 'hidden',
+          },
+          '&:hover': {
+            backgroundColor: 'inherit',
           },
         }}
         variant="permanent"
         open
       >
-        <IconButton onClick={toggleDrawer} sx={{ margin: 1 }}>
+        <IconButton onClick={toggleDrawer} 
+              sx={{ 
+                margin: 1, 
+                '&:hover': {
+                  backgroundColor: 'inherit', 
+                },
+              }}
+        >
           <MenuIcon />
         </IconButton>
         {DrawerList}
