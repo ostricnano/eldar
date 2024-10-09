@@ -19,11 +19,13 @@ const AppRouter = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Toaster
         duration={2500}
+        richColors
         toastOptions={{
           style: {
             height: "45px",
             padding: "0.5rem",
           },
+          
         }}
       />
       <BrowserRouter>

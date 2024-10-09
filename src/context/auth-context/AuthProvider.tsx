@@ -19,13 +19,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   });
 
   const login = (email: string, password: string, role: string) => {
+    const jwToken = "jwt lo guardamos en el sesion storage para mantener la sesion activa";
     if (email && password) {
       setAuthState({
-        jwt: "jwt",
+        jwt: jwToken,
         username: email,
         role: role,
       });
-      sessionStorage.setItem("jwt", "jwt");
+      sessionStorage.setItem("jwt", jwToken);
     }
   };
 
