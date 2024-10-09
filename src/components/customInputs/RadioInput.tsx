@@ -7,16 +7,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-
-interface RadioInputProps {
-  label: string;
-  name: string;
-  value?: string;
-  options?: string[];
-  error?: boolean;
-  helperText?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { RadioInputProps } from "../../types";
 
 const RadioInput = ({
   label,

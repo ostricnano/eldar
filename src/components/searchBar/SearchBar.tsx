@@ -1,16 +1,11 @@
 import { Box, IconButton, TextField } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import { CloseIcon } from "../../icons/CloseIcon";
+import { SearchBarProps } from "../../types";
 
-interface SearchBarProps {
-  query: string;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-  label: string;
-}
-
-const SearchBar = ({ query, label ,setQuery }: SearchBarProps) => {
+const SearchBar = ({ query, label, setQuery }: SearchBarProps) => {
   return (
-    <Box sx={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
       <TextField
         label={label}
         variant="outlined"
@@ -19,11 +14,11 @@ const SearchBar = ({ query, label ,setQuery }: SearchBarProps) => {
         sx={{ width: "300px" }}
       />
       <IconButton>
-        <SearchIcon  />
+        <SearchIcon />
       </IconButton>
       {query.length > 0 && (
-        <IconButton onClick={()=> setQuery('')}>
-          <CloseIcon fontSize="16px" color='#ababab' />
+        <IconButton onClick={() => setQuery("")}>
+          <CloseIcon fontSize="16px" color="#ababab" />
         </IconButton>
       )}
     </Box>

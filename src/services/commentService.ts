@@ -1,13 +1,6 @@
 import { toast } from "sonner";
 import { axiosClient } from "./axiosClient";
-
-interface CreateProps {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
-}
+import { CreateComments } from "../types";
 
 export const getAllComments = async () => {
   try {
@@ -18,7 +11,7 @@ export const getAllComments = async () => {
   }
 };
 
-export const createComment = async (comment: CreateProps) => {
+export const createComment = async (comment: CreateComments) => {
   try {
     const response = await axiosClient.post("/comments", comment);
     if (response.status === 201) {
@@ -28,11 +21,12 @@ export const createComment = async (comment: CreateProps) => {
       toast.error("Error creating comment");
     }
   } catch (error) {
+    toast.error("Error updating post");
     console.error(error);
   }
 };
 
-export const updateComment = async (id: number, comment: CreateProps) => {
+export const updateComment = async (id: number, comment: CreateComments) => {
   try {
     const response = await axiosClient.put(`/comments/${id}`, comment);
     if (response.status === 200) {
@@ -42,6 +36,7 @@ export const updateComment = async (id: number, comment: CreateProps) => {
       toast.error("Error updating comment");
     }
   } catch (error) {
+    toast.error("Error updating post");
     console.error(error);
   }
 };
@@ -56,7 +51,7 @@ export const deleteComment = async (id: number) => {
       toast.error("Error deleting comment");
     }
   } catch (error) {
-    console.error(error);
     toast.error("Error deleting comment");
+    console.error(error);
   }
 };

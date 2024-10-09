@@ -7,7 +7,7 @@ import {
   Grid,
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
-import { UserProfileProps } from "../../pages/adminPages/Users";
+import { UserProfileProps } from "../../types";
 
 export interface UserProps {
     user : UserProfileProps;

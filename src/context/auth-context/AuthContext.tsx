@@ -3,7 +3,7 @@ import { AuthState } from "./AuthProvider";
 
 interface AuthContextProps {
   authState: AuthState;
-  login: (email: string, password:string, role: string) => void;
+  login: (email: string, password:string) => void;
   logout: () => void;
 }
 

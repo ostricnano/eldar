@@ -1,22 +1,12 @@
-import React from "react";
 import { Box, Modal, Typography } from "@mui/material";
 import { CloseIcon } from "../../icons/CloseIcon";
-
-interface BaseModalProps {
-  children?: React.ReactNode;
-  openModal: boolean;
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  title?: string;
-  width?: string;
-  onClose?: () => void;
-}
+import { BaseModalProps } from "../../types";
 
 export const BaseModal = ({
   children,
   openModal,
   setOpenModal,
   title,
-  width = "60%",
   onClose = () => setOpenModal(false),
 }: BaseModalProps) => {
   return (
@@ -32,7 +22,11 @@ export const BaseModal = ({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: width,
+          width: {
+            xs: "90%", 
+            sm: "70%",  
+            md: "50%",  
+          },
           bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,

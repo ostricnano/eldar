@@ -1,4 +1,4 @@
-import { CustomButton } from "../buttons.tsx/CustomButton";
+import { CustomButton } from "../buttons/CustomButton";
 import { Box } from "@mui/material";
 import { BaseModal } from "../modals/BaseModal";
 import { useFormik } from "formik";
@@ -17,8 +17,10 @@ interface CreatePostProps {
   setOpenPostModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-
-export const CreatePost = ({openPostModal, setOpenPostModal}: CreatePostProps) => {
+export const CreatePost = ({
+  openPostModal,
+  setOpenPostModal,
+}: CreatePostProps) => {
   const { handleSubmit, handleChange, setValues, values, errors } = useFormik({
     initialValues: {
       title: "",
@@ -48,7 +50,6 @@ export const CreatePost = ({openPostModal, setOpenPostModal}: CreatePostProps) =
       openModal={openPostModal}
       setOpenModal={setOpenPostModal}
       title="Create a post"
-      width="50%"
     >
       <Box
         sx={{

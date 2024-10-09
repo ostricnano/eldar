@@ -15,6 +15,7 @@ export const CustomButton = ({
   return (
     <Button
       variant="contained"
+      color="primary"
       fullWidth
       type={type}
       sx={{

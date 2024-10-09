@@ -1,33 +1,35 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-interface PostProps {
-  id: number;
-  title: string;
-  body: string;
-}
+import { useState } from "react";
+import { Box, Typography } from "@mui/material";
+import UserProfile from "../../components/cards/UserProfile";
+import SearchBar from "../../components/searchBar/SearchBar";
+import { useUsers } from "../../hooks/useUsers";
+import {
+  basePageStyles,
+  cardContainerStyles,
+  userHeaderStyles,
+} from "../../assets/styles/pages";
 
 const UserPage = () => {
-  const [posts, setPosts] = useState<PostProps[]>([]);
+  const { users } = useUsers();
+  const [query, setQuery] = useState<string>("");
 
-  useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(response => setPosts(response.data))
-      .catch(error => console.error(error));
-  }, []);
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
-    <div>
-      <h2>Publicaciones</h2>
-      <ul>
-        {posts.map(post => (
-          <li key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.body}</p>
-          </li>
+    <Box sx={basePageStyles}>
+      <Box sx={userHeaderStyles}>
+        <Typography variant="h5">Users</Typography>
+
+        <SearchBar query={query} setQuery={setQuery} label="Search users" />
+      </Box>
+      <Box sx={cardContainerStyles}>
+        {filteredUsers.map((user) => (
+          <UserProfile key={user.username} user={user} />
         ))}
-      </ul>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

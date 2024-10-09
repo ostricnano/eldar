@@ -1,21 +1,16 @@
 import { Card, CardContent, Typography, CardHeader, Avatar } from "@mui/material";
 import { blue } from "@mui/material/colors";
+import { CreateComments } from "../../types";
 
-interface CommentCardProps {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
-}
 
-const CommentCard = ({ postId, id, name, email, body }: CommentCardProps) => {
+
+const CommentCard = ({ postId, id, name, email, body }: CreateComments) => {
   return (
     <Card sx={{ maxWidth: 280, margin: '1rem' }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: blue[500] }}>
-            {name.charAt(0)} 
+            {name.charAt(0)} CreateComments
           </Avatar>
         }
         title={name}

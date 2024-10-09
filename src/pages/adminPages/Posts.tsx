@@ -6,13 +6,8 @@ import { useState } from "react";
 import { CreatePost } from "../../components/posts/CreatePost";
 import { EditPost } from "../../components/posts/EditPost";
 import SearchBar from "../../components/searchBar/SearchBar";
-
-export interface PostsProps {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+import { PostsProps } from "../../types";
+import { basePageStyles, cardContainerStyles } from "../../assets/styles/pages";
 
 const Posts = () => {
   const [openPostModal, setOpenPostModal] = useState(false);
@@ -23,8 +18,8 @@ const Posts = () => {
 
   const [query, setQuery] = useState<string>("");
 
-  const [currentPage, setCurrentPage] = useState<number>(1); 
-  const postsPerPage = 6; 
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const postsPerPage = 10;
 
   const handleEditPost = (post: PostsProps) => {
     setPostSelected(post);
@@ -39,34 +34,22 @@ const Posts = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-
-  const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChangePage = (
+    _event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
     setCurrentPage(value);
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <Box sx={basePageStyles}>
       <Header
         title="Posts"
         createLabel="Create Post"
         setOpenModal={setOpenPostModal}
       />
       <SearchBar query={query} setQuery={setQuery} label="Search posts" />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
+      <Box sx={cardContainerStyles}>
         {currentPosts.map((post) => (
           <PostCard key={post.id} post={post} onEdit={handleEditPost} />
         ))}

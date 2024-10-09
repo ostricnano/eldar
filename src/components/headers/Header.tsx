@@ -1,11 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-
-interface HeaderProps {
-  title: string;
-  createLabel?: string;
-  setOpenModal?: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenEditModal?: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { HeaderProps } from "../../types";
 
 export const Header = ({
   title,
@@ -20,6 +14,7 @@ export const Header = ({
         alignItems: "center",
         justifyContent: "space-between",
         width: "100%",
+        padding: "20px",
       }}
     >
       <Typography variant="h5" sx={{ color: "#000" }}>
@@ -30,6 +25,13 @@ export const Header = ({
           <Button
             onClick={() => setOpenModal && setOpenModal(true)}
             variant="outlined"
+            sx={{
+              backgroundColor: "#ababab",
+              color: "#fff",
+              borderRadius: "5px",
+              padding: "10px 20px",
+              gap: "1rem",
+            }}
           >
             {createLabel}
           </Button>

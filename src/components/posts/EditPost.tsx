@@ -1,11 +1,11 @@
-import { CustomButton } from "../buttons.tsx/CustomButton";
+import { CustomButton } from "../buttons/CustomButton";
 import { Box, Button } from "@mui/material";
 import { BaseModal } from "../modals/BaseModal";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import CustomInput from "../customInputs/CustomInput";
-import { PostsProps } from "../../pages/adminPages/Posts";
 import { deletePost, updatePost } from "../../services/postService";
+import { PostsProps } from "../../types";
 
 const postValidation = Yup.object().shape({
   title: Yup.string().required("Title is required"),
@@ -24,13 +24,12 @@ export const EditPost = ({
   setOpenPostEditModal,
   postSelected,
 }: EditPostProps) => {
-
   const { handleSubmit, handleChange, setValues, values, errors } = useFormik({
     initialValues: {
-      title:  postSelected ? postSelected?.title : "",
-      body:  postSelected ? postSelected?.body : "",
-      userId:  postSelected ? postSelected?.userId.toString() : "",
-      id:  postSelected ? postSelected?.id.toString() : "",
+      title: postSelected ? postSelected?.title : "",
+      body: postSelected ? postSelected?.body : "",
+      userId: postSelected ? postSelected?.userId.toString() : "",
+      id: postSelected ? postSelected?.id.toString() : "",
     },
     onSubmit: async (values) => {
       const post = {
@@ -58,9 +57,9 @@ export const EditPost = ({
       title: "",
       body: "",
       userId: "",
-      id: "", 
-    })
-  }
+      id: "",
+    });
+  };
 
   const handleDelete = (id: number) => {
     try {
@@ -72,11 +71,10 @@ export const EditPost = ({
         userId: "",
         id: "",
       });
-      
     } catch (error) {
       console.error(error);
     }
-  }
+  };
   return (
     <BaseModal
       openModal={openPostEditModal}

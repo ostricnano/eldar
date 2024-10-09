@@ -1,62 +1,29 @@
 import { Box, Typography } from "@mui/material";
 import CustomInput from "../customInputs/CustomInput";
-import { CustomButton } from "../buttons.tsx/CustomButton";
+import { CustomButton } from "../buttons/CustomButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../hooks/useAuth";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import RadioInput from "../customInputs/RadioInput";
+import { theme } from "../../theme/themeConfig";
+
 
 const loginValidationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
-  role: Yup.string().required("Role is required"),
 });
 
 const LoginForm = () => {
-  const [loading, setLoading] = useState(false);
-  const { login, authState } = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (authState.jwt) {
-      if (authState.role === "admin") {
-        navigate("/users");
-        toast.success("Logged in successfully");
-      } else if (authState.role === "user") {
-        navigate("/user/users");
-        toast.success("Logged in successfully");
-      }
-    }
-  }, [authState.jwt, authState.role, navigate]);
+  const { login } = useAuth();
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
       email: "",
       password: "",
-      role: "",
     },
-    onSubmit: (values) => {
-      setLoading(true);
-      try {
-        login(values.email, values.password, values.role);
-        if (authState.jwt && authState.role === "admin") {
-            navigate("/posts");
-            toast.success("Logged in successfully");
-        } else if (authState.jwt && authState.role === "user") {
-            navigate("user");
-            toast.success("Logged in successfully");
-        }
-      } catch (error) {
-        toast.error("Failed to login");
-        console.log(error);
-      } finally {
-          setLoading(false);
-      }
+    onSubmit: async (values) => {
+      login(values.email, values.password);
     },
     validationSchema: loginValidationSchema,
     validateOnChange: false,
@@ -71,6 +38,7 @@ const LoginForm = () => {
         justifyContent: "center",
         width: "100%",
         padding: "1rem",
+        backgroundColor: theme.palette.primary.main,
       }}
     >
       <Typography
@@ -115,15 +83,6 @@ const LoginForm = () => {
               error={Boolean(errors.password)}
               helperText={errors.password}
             />
-            <RadioInput
-              label="Role"
-              name="role"
-              value={values.role}
-              options={["admin", "user"]}
-              error={Boolean(errors.role)}
-              helperText={errors.role}
-              onChange={handleChange}
-            />
           </Box>
           <Box
             sx={{
@@ -133,9 +92,7 @@ const LoginForm = () => {
               width: "100%",
             }}
           >
-            <CustomButton type="submit" loading={loading}>
-              Iniciar sesión
-            </CustomButton>
+            <CustomButton type="submit">Iniciar sesión</CustomButton>
           </Box>
         </form>
       </Box>
