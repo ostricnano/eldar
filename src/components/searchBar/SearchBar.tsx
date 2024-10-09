@@ -1,12 +1,7 @@
 import { Box, IconButton, TextField } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import { CloseIcon } from "../../icons/CloseIcon";
-
-interface SearchBarProps {
-  query: string;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-  label: string;
-}
+import { SearchBarProps } from "../../types";
 
 const SearchBar = ({ query, label ,setQuery }: SearchBarProps) => {
   return (

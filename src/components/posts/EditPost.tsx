@@ -4,8 +4,8 @@ import { BaseModal } from "../modals/BaseModal";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import CustomInput from "../customInputs/CustomInput";
-import { PostsProps } from "../../pages/adminPages/Posts";
 import { deletePost, updatePost } from "../../services/postService";
+import { PostsProps } from "../../types";
 
 const postValidation = Yup.object().shape({
   title: Yup.string().required("Title is required"),

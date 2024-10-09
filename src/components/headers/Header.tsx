@@ -1,11 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-
-interface HeaderProps {
-  title: string;
-  createLabel?: string;
-  setOpenModal?: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenEditModal?: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { HeaderProps } from "../../types";
 
 export const Header = ({
   title,

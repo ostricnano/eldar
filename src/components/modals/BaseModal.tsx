@@ -1,15 +1,7 @@
 import React from "react";
 import { Box, Modal, Typography } from "@mui/material";
 import { CloseIcon } from "../../icons/CloseIcon";
-
-interface BaseModalProps {
-  children?: React.ReactNode;
-  openModal: boolean;
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  title?: string;
-  width?: string;
-  onClose?: () => void;
-}
+import { BaseModalProps } from "../../types";
 
 export const BaseModal = ({
   children,

@@ -1,11 +1,7 @@
 import { toast } from "sonner";
 import { axiosClient } from "./axiosClient";
+import { CreatePost } from "../types";
 
-interface CreatePost {
-  title: string;
-  body: string;
-  userId: number;
-}
 
 export const getAllPost = async () => {
   try {

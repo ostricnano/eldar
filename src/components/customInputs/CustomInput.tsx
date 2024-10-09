@@ -2,19 +2,8 @@ import { Box, FormLabel, TextField } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
+import { CustomInputProps } from "../../types";
 
-interface CustomInputProps {
-  type?: string;
-  label: string;
-  name?: string;
-  value: string;
-  helperText?: string;
-  error: boolean;
-  rows?: number;
-  multiline?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-
-}
 
 const CustomInput = ({
   label,

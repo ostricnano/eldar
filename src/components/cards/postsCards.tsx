@@ -1,12 +1,8 @@
 import { Card, CardContent, Typography, CardHeader, Button, CardActions } from "@mui/material";
+import { PostsProps } from "../../types";
 
 interface PostCardProps {
-  post: {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-  };
+  post: PostsProps;
   onEdit: (post: PostCardProps["post"]) => void;
 }
 

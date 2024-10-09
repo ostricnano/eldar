@@ -4,29 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import UserProfile from "../../components/cards/UserProfile";
 import SearchBar from "../../components/searchBar/SearchBar";
-
-export interface UserProfileProps {
-  name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string;
-    };
-  };
-  phone: string;
-  website: string;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
-}
+import { UserProfileProps } from "../../types";
 
 export const Users = () => {
   const [users, setUsers] = useState<UserProfileProps[]>([]);
@@ -55,7 +33,7 @@ export const Users = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
-  
+
   return (
     <Box
       sx={{

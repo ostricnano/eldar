@@ -6,13 +6,8 @@ import { useState } from "react";
 import { CreatePost } from "../../components/posts/CreatePost";
 import { EditPost } from "../../components/posts/EditPost";
 import SearchBar from "../../components/searchBar/SearchBar";
+import { PostsProps } from "../../types";
 
-export interface PostsProps {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
 
 const Posts = () => {
   const [openPostModal, setOpenPostModal] = useState(false);

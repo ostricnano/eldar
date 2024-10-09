@@ -1,13 +1,6 @@
 import { toast } from "sonner";
 import { axiosClient } from "./axiosClient";
-
-interface CreateProps {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
-}
+import { CreateComments } from "../types";
 
 export const getAllComments = async () => {
   try {
@@ -18,7 +11,7 @@ export const getAllComments = async () => {
   }
 };
 
-export const createComment = async (comment: CreateProps) => {
+export const createComment = async (comment: CreateComments) => {
   try {
     const response = await axiosClient.post("/comments", comment);
     if (response.status === 201) {
@@ -32,7 +25,7 @@ export const createComment = async (comment: CreateProps) => {
   }
 };
 
-export const updateComment = async (id: number, comment: CreateProps) => {
+export const updateComment = async (id: number, comment: CreateComments) => {
   try {
     const response = await axiosClient.put(`/comments/${id}`, comment);
     if (response.status === 200) {
