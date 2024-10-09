@@ -1,38 +1,17 @@
+import { useState } from "react";
 import { Box } from "@mui/material";
 import { Header } from "../../components/headers/Header";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import UserProfile from "../../components/cards/UserProfile";
 import SearchBar from "../../components/searchBar/SearchBar";
-import { UserProfileProps } from "../../types";
+import { useUsers } from "../../hooks/useUsers";
 
 export const Users = () => {
-  const [users, setUsers] = useState<UserProfileProps[]>([]);
+  const { users } = useUsers();
   const [query, setQuery] = useState<string>("");
-  const [filteredPosts, setFilteredPosts] = useState<UserProfileProps[]>([]);
 
-  useEffect(() => {
-    const filtered = users.filter(
-      (user) =>
-        user.name.toLowerCase().includes(query.toLowerCase()) 
-    );
-    setFilteredPosts(filtered);
-  }, [query, users]);
-
-
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      setUsers(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const filteredUsers = users.filter(
+    (user) => user.name.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
     <Box
@@ -53,7 +32,7 @@ export const Users = () => {
           justifyContent: "center",
         }}
       >
-        {filteredPosts.map((user) => (
+        {filteredUsers.map((user) => (
           <UserProfile key={user.username} user={user} />
         ))}
       </Box>

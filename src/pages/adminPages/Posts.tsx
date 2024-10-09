@@ -19,7 +19,7 @@ const Posts = () => {
   const [query, setQuery] = useState<string>("");
 
   const [currentPage, setCurrentPage] = useState<number>(1); 
-  const postsPerPage = 6; 
+  const postsPerPage = 10; 
 
   const handleEditPost = (post: PostsProps) => {
     setPostSelected(post);
@@ -60,6 +60,7 @@ const Posts = () => {
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "center",
+          gap: "0.5rem",
         }}
       >
         {currentPosts.map((post) => (

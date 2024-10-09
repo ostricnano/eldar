@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import CustomInput from "../customInputs/CustomInput";
-import { CustomButton } from "../buttons.tsx/CustomButton";
+import { CustomButton } from "../buttons/CustomButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../../hooks/useAuth";
@@ -45,17 +45,17 @@ const LoginForm = () => {
       try {
         login(values.email, values.password, values.role);
         if (authState.jwt && authState.role === "admin") {
-            navigate("/posts");
-            toast.success("Logged in successfully");
+          navigate("/posts");
+          toast.success("Logged in successfully");
         } else if (authState.jwt && authState.role === "user") {
-            navigate("user");
-            toast.success("Logged in successfully");
+          navigate("user");
+          toast.success("Logged in successfully");
         }
       } catch (error) {
         toast.error("Failed to login");
         console.log(error);
       } finally {
-          setLoading(false);
+        setLoading(false);
       }
     },
     validationSchema: loginValidationSchema,

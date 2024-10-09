@@ -11,7 +11,7 @@ const Comments = () => {
   const [query, setQuery] = useState<string>("");
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const commentsPerPage = 6;
+  const commentsPerPage = 10;
 
   const filterComments = comments.filter((comment) => {
     return comment.name.toLowerCase().includes(query.toLowerCase());
@@ -53,6 +53,7 @@ const Comments = () => {
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "center",
+          gap: "0.5rem",
         }}
       >
         {currentComments.map((comment) => (
