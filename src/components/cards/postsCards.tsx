@@ -1,4 +1,11 @@
-import { Card, CardContent, Typography, CardHeader, Button, CardActions } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardHeader,
+  Button,
+  CardActions,
+} from "@mui/material";
 import { PostsProps } from "../../types";
 
 interface PostCardProps {
@@ -8,7 +15,7 @@ interface PostCardProps {
 
 const PostCard = ({ post, onEdit }: PostCardProps) => {
   const handleEditClick = () => {
-    onEdit(post); 
+    onEdit(post);
   };
   return (
     <Card sx={{ maxWidth: 400, margin: "1rem auto" }}>
@@ -22,7 +29,11 @@ const PostCard = ({ post, onEdit }: PostCardProps) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button sx={{color:'#fff', backgroundColor:'#ababab'}} size="small" onClick={handleEditClick}>
+        <Button
+          sx={{ color: "#fff", backgroundColor: "#ababab" }}
+          size="small"
+          onClick={handleEditClick}
+        >
           Edit
         </Button>
       </CardActions>

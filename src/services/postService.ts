@@ -41,6 +41,15 @@ export const updatePost = async (id: number, post: CreatePost) => {
   }
 };
 
+export const getPost = async (id: number) => {
+  try {
+    const response = await axiosClient.get(`/posts/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const deletePost = async (id: number) => {
   try {
     const response = await axiosClient.delete(`/posts/${id}`);

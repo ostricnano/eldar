@@ -8,6 +8,7 @@ import { EditPost } from "../../components/posts/EditPost";
 import SearchBar from "../../components/searchBar/SearchBar";
 import { PostsProps } from "../../types";
 import { basePageStyles, cardContainerStyles } from "../../assets/styles/pages";
+import { getPost } from "../../services/postService";
 
 const Posts = () => {
   const [openPostModal, setOpenPostModal] = useState(false);
@@ -21,7 +22,14 @@ const Posts = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const postsPerPage = 10;
 
-  const handleEditPost = (post: PostsProps) => {
+  const handleEditPost  = async (post: PostsProps) => {
+    try {
+      const response = await getPost(post.id);
+      setPostSelected(response);
+    } catch (error) {
+      console.error(error);
+      
+    }
     setPostSelected(post);
     setOpenPostEditModal(true);
   };
